@@ -1,0 +1,461 @@
+###############################################################################
+#
+# IAR ANSI C/C++ Compiler V9.30.1.335/W64 for ARM         19/Dec/2022  20:33:56
+# Copyright 1999-2022 IAR Systems AB.
+#
+#    Cpu mode          =  thumb
+#    Endian            =  little
+#    Source file       =  C:\Users\Jungjinseong\IAR_projects\user\moveWheel.c
+#    Command line      =
+#        -f C:\Users\Jungjinseong\IAR_projects\Debug\Obj\user\moveWheel.o.rsp
+#        (C:\Users\Jungjinseong\IAR_projects\user\moveWheel.c -D
+#        USE_STDPERIPH_DRIVER -D STM32F10X_CL -lC
+#        C:\Users\Jungjinseong\IAR_projects\Debug\List\user -o
+#        C:\Users\Jungjinseong\IAR_projects\Debug\Obj\user --no_cse --no_unroll
+#        --no_inline --no_code_motion --no_tbaa --no_clustering --no_scheduling
+#        --debug --endian=little --cpu=Cortex-M3 -e --fpu=None --dlib_config
+#        "C:\Program Files\IAR Systems\Embedded Workbench
+#        9.1_2\arm\inc\c\DLib_Config_Normal.h" -I
+#        C:\Users\Jungjinseong\IAR_projects\libraries\CMSIS\DeviceSupport\ -I
+#        C:\Users\Jungjinseong\IAR_projects\libraries\CMSIS\DeviceSupport\Startup\
+#        -I
+#        C:\Users\Jungjinseong\IAR_projects\libraries\STM32F10x_StdPeriph_Driver_v3.5\inc\
+#        -I
+#        C:\Users\Jungjinseong\IAR_projects\libraries\STM32F10x_StdPeriph_Driver_v3.5\src\
+#        -I C:\Users\Jungjinseong\IAR_projects\libraries\LCD\ -I
+#        C:\Users\Jungjinseong\IAR_projects\user\ -I
+#        C:\Users\Jungjinseong\IAR_projects\user\inc\ -Ol -I "C:\Program
+#        Files\IAR Systems\Embedded Workbench 9.1_2\arm\CMSIS\Core\Include\\")
+#        --dependencies=n
+#        C:\Users\Jungjinseong\IAR_projects\Debug\Obj\user\moveWheel.o.d
+#    Locale            =  C
+#    List file         =
+#        C:\Users\Jungjinseong\IAR_projects\Debug\List\user\moveWheel.lst
+#    Object file       =
+#        C:\Users\Jungjinseong\IAR_projects\Debug\Obj\user\moveWheel.o
+#    Runtime model:       
+#      __CPP_Runtime   =  1
+#      __SystemLibrary =  DLib
+#      __dlib_version  =  6
+#      __size_limit    =  32768|ARM.EW.LINKER
+#
+###############################################################################
+
+C:\Users\Jungjinseong\IAR_projects\user\moveWheel.c
+      1          #include <moveWheel.h>
+      2          #include "ultrasonic.h"
+      3          #include "stm32f10x.h"
+      4          #include "stm32f10x_rcc.h"
+      5          #include "stm32f10x_gpio.h"
+      6          
+
+   \                                 In section .text, align 2, keep-with-next
+      7          void RCC_Configure_wheel_pinE(void)//must do
+      8          {
+   \                     RCC_Configure_wheel_pinE: (+1)
+   \        0x0   0xB580             PUSH     {R7,LR}
+      9             RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOE,ENABLE);     // RCC GPIO E
+   \        0x2   0x2101             MOVS     R1,#+1
+   \        0x4   0x2040             MOVS     R0,#+64
+   \        0x6   0x.... 0x....      BL       RCC_APB2PeriphClockCmd
+     10          }
+   \        0xA   0xBD01             POP      {R0,PC}
+     11          
+
+   \                                 In section .text, align 2, keep-with-next
+     12          void GPIO_Configure_wheel(void)//must do
+     13          {
+   \                     GPIO_Configure_wheel: (+1)
+   \        0x0   0xB51C             PUSH     {R2-R4,LR}
+     14              GPIO_InitTypeDef GPIO_InitStructure;
+     15              GPIO_InitStructure.GPIO_Pin = GPIO_Pin_2;//Á¤¹æÇâ(¿ì)
+   \        0x2   0x2004             MOVS     R0,#+4
+   \        0x4   0xF8AD 0x0000      STRH     R0,[SP, #+0]
+     16              GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
+   \        0x8   0x2010             MOVS     R0,#+16
+   \        0xA   0xF88D 0x0003      STRB     R0,[SP, #+3]
+     17              GPIO_InitStructure.GPIO_Speed =  GPIO_Speed_50MHz;
+   \        0xE   0x2003             MOVS     R0,#+3
+   \       0x10   0xF88D 0x0002      STRB     R0,[SP, #+2]
+     18              GPIO_Init(GPIOE, &GPIO_InitStructure);
+   \       0x14   0x....             LDR.N    R4,??DataTable6
+   \       0x16   0x4669             MOV      R1,SP
+   \       0x18   0x0020             MOVS     R0,R4
+   \       0x1A   0x.... 0x....      BL       GPIO_Init
+     19          
+     20              GPIO_InitStructure.GPIO_Pin = GPIO_Pin_3;//¿ª¹æÇâ(¿ì)
+   \       0x1E   0x2008             MOVS     R0,#+8
+   \       0x20   0xF8AD 0x0000      STRH     R0,[SP, #+0]
+     21              GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
+   \       0x24   0x2010             MOVS     R0,#+16
+   \       0x26   0xF88D 0x0003      STRB     R0,[SP, #+3]
+     22              GPIO_InitStructure.GPIO_Speed =  GPIO_Speed_50MHz;
+   \       0x2A   0x2003             MOVS     R0,#+3
+   \       0x2C   0xF88D 0x0002      STRB     R0,[SP, #+2]
+     23              GPIO_Init(GPIOE, &GPIO_InitStructure);
+   \       0x30   0x4669             MOV      R1,SP
+   \       0x32   0x0020             MOVS     R0,R4
+   \       0x34   0x.... 0x....      BL       GPIO_Init
+     24          
+     25              GPIO_InitStructure.GPIO_Pin = GPIO_Pin_4;//Á¤¹æÇâ(ÁÂ)
+   \       0x38   0x2010             MOVS     R0,#+16
+   \       0x3A   0xF8AD 0x0000      STRH     R0,[SP, #+0]
+     26              GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
+   \       0x3E   0x2010             MOVS     R0,#+16
+   \       0x40   0xF88D 0x0003      STRB     R0,[SP, #+3]
+     27              GPIO_InitStructure.GPIO_Speed =  GPIO_Speed_50MHz;
+   \       0x44   0x2003             MOVS     R0,#+3
+   \       0x46   0xF88D 0x0002      STRB     R0,[SP, #+2]
+     28              GPIO_Init(GPIOE, &GPIO_InitStructure);
+   \       0x4A   0x4669             MOV      R1,SP
+   \       0x4C   0x0020             MOVS     R0,R4
+   \       0x4E   0x.... 0x....      BL       GPIO_Init
+     29          
+     30              GPIO_InitStructure.GPIO_Pin = GPIO_Pin_5;//¿ª¹æÇâ(ÁÂ)
+   \       0x52   0x2020             MOVS     R0,#+32
+   \       0x54   0xF8AD 0x0000      STRH     R0,[SP, #+0]
+     31              GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
+   \       0x58   0x2010             MOVS     R0,#+16
+   \       0x5A   0xF88D 0x0003      STRB     R0,[SP, #+3]
+     32              GPIO_InitStructure.GPIO_Speed =  GPIO_Speed_50MHz;
+   \       0x5E   0x2003             MOVS     R0,#+3
+   \       0x60   0xF88D 0x0002      STRB     R0,[SP, #+2]
+     33              GPIO_Init(GPIOE, &GPIO_InitStructure);
+   \       0x64   0x4669             MOV      R1,SP
+   \       0x66   0x0020             MOVS     R0,R4
+   \       0x68   0x.... 0x....      BL       GPIO_Init
+     34          }
+   \       0x6C   0xBD13             POP      {R0,R1,R4,PC}
+     35          
+
+   \                                 In section .text, align 2, keep-with-next
+     36          void toFrontRightWheel(){
+   \                     toFrontRightWheel: (+1)
+   \        0x0   0xB510             PUSH     {R4,LR}
+     37              GPIO_SetBits(GPIOE, GPIO_Pin_2);//PE0
+   \        0x2   0x....             LDR.N    R4,??DataTable6
+   \        0x4   0x2104             MOVS     R1,#+4
+   \        0x6   0x0020             MOVS     R0,R4
+   \        0x8   0x.... 0x....      BL       GPIO_SetBits
+     38              GPIO_ResetBits(GPIOE, GPIO_Pin_3);//PE1
+   \        0xC   0x2108             MOVS     R1,#+8
+   \        0xE   0x0020             MOVS     R0,R4
+   \       0x10   0x.... 0x....      BL       GPIO_ResetBits
+     39          }
+   \       0x14   0xBD10             POP      {R4,PC}
+     40          
+
+   \                                 In section .text, align 2, keep-with-next
+     41          void toFrontLeftWheel(){
+   \                     toFrontLeftWheel: (+1)
+   \        0x0   0xB510             PUSH     {R4,LR}
+     42              GPIO_SetBits(GPIOE, GPIO_Pin_4);//PE2
+   \        0x2   0x....             LDR.N    R4,??DataTable6
+   \        0x4   0x2110             MOVS     R1,#+16
+   \        0x6   0x0020             MOVS     R0,R4
+   \        0x8   0x.... 0x....      BL       GPIO_SetBits
+     43              GPIO_ResetBits(GPIOE, GPIO_Pin_5);//PE3
+   \        0xC   0x2120             MOVS     R1,#+32
+   \        0xE   0x0020             MOVS     R0,R4
+   \       0x10   0x.... 0x....      BL       GPIO_ResetBits
+     44          }
+   \       0x14   0xBD10             POP      {R4,PC}
+     45          
+
+   \                                 In section .text, align 2, keep-with-next
+     46          void toBackRightWheel(){
+   \                     toBackRightWheel: (+1)
+   \        0x0   0xB510             PUSH     {R4,LR}
+     47              GPIO_SetBits(GPIOE, GPIO_Pin_3);//¿À¸¥¹ÙÄû
+   \        0x2   0x....             LDR.N    R4,??DataTable6
+   \        0x4   0x2108             MOVS     R1,#+8
+   \        0x6   0x0020             MOVS     R0,R4
+   \        0x8   0x.... 0x....      BL       GPIO_SetBits
+     48              GPIO_ResetBits(GPIOE, GPIO_Pin_2);
+   \        0xC   0x2104             MOVS     R1,#+4
+   \        0xE   0x0020             MOVS     R0,R4
+   \       0x10   0x.... 0x....      BL       GPIO_ResetBits
+     49          }
+   \       0x14   0xBD10             POP      {R4,PC}
+     50          
+
+   \                                 In section .text, align 2, keep-with-next
+     51          void toBackLeftWheel(){
+   \                     toBackLeftWheel: (+1)
+   \        0x0   0xB510             PUSH     {R4,LR}
+     52              GPIO_SetBits(GPIOE, GPIO_Pin_5);//¿Þ¹ÙÄû
+   \        0x2   0x....             LDR.N    R4,??DataTable6
+   \        0x4   0x2120             MOVS     R1,#+32
+   \        0x6   0x0020             MOVS     R0,R4
+   \        0x8   0x.... 0x....      BL       GPIO_SetBits
+     53              GPIO_ResetBits(GPIOE, GPIO_Pin_4);
+   \        0xC   0x2110             MOVS     R1,#+16
+   \        0xE   0x0020             MOVS     R0,R4
+   \       0x10   0x.... 0x....      BL       GPIO_ResetBits
+     54          }
+   \       0x14   0xBD10             POP      {R4,PC}
+     55          
+
+   \                                 In section .text, align 2, keep-with-next
+     56          void stopAllWheel(){
+   \                     stopAllWheel: (+1)
+   \        0x0   0xB510             PUSH     {R4,LR}
+     57              GPIO_ResetBits(GPIOE, GPIO_Pin_2);
+   \        0x2   0x....             LDR.N    R4,??DataTable6
+   \        0x4   0x2104             MOVS     R1,#+4
+   \        0x6   0x0020             MOVS     R0,R4
+   \        0x8   0x.... 0x....      BL       GPIO_ResetBits
+     58              GPIO_ResetBits(GPIOE, GPIO_Pin_3);
+   \        0xC   0x2108             MOVS     R1,#+8
+   \        0xE   0x0020             MOVS     R0,R4
+   \       0x10   0x.... 0x....      BL       GPIO_ResetBits
+     59              GPIO_ResetBits(GPIOE, GPIO_Pin_4);
+   \       0x14   0x2110             MOVS     R1,#+16
+   \       0x16   0x0020             MOVS     R0,R4
+   \       0x18   0x.... 0x....      BL       GPIO_ResetBits
+     60              GPIO_ResetBits(GPIOE, GPIO_Pin_5);
+   \       0x1C   0x2120             MOVS     R1,#+32
+   \       0x1E   0x0020             MOVS     R0,R4
+   \       0x20   0x.... 0x....      BL       GPIO_ResetBits
+     61          }
+   \       0x24   0xBD10             POP      {R4,PC}
+     62          //¿À¸¥¹ÙÄû : PE0, PE1 ... ¿Þ¹ÙÄû: PE2, PE3
+
+   \                                 In section .text, align 2, keep-with-next
+     63          void setDirectionToFront(){
+   \                     setDirectionToFront: (+1)
+   \        0x0   0xB580             PUSH     {R7,LR}
+     64              toFrontRightWheel();
+   \        0x2   0x.... 0x....      BL       toFrontRightWheel
+     65              toFrontLeftWheel();
+   \        0x6   0x.... 0x....      BL       toFrontLeftWheel
+     66          
+     67          }
+   \        0xA   0xBD01             POP      {R0,PC}
+     68          
+
+   \                                 In section .text, align 2, keep-with-next
+     69          void setDirectionToBack(){
+   \                     setDirectionToBack: (+1)
+   \        0x0   0xB580             PUSH     {R7,LR}
+     70            toBackRightWheel();
+   \        0x2   0x.... 0x....      BL       toBackRightWheel
+     71            toBackLeftWheel();
+   \        0x6   0x.... 0x....      BL       toBackLeftWheel
+     72          }
+   \        0xA   0xBD01             POP      {R0,PC}
+     73          
+
+   \                                 In section .text, align 2, keep-with-next
+     74          void turnToRight(){
+   \                     turnToRight: (+1)
+   \        0x0   0xB580             PUSH     {R7,LR}
+     75            toFrontRightWheel();
+   \        0x2   0x.... 0x....      BL       toFrontRightWheel
+     76            toBackLeftWheel();
+   \        0x6   0x.... 0x....      BL       toBackLeftWheel
+     77          }
+   \        0xA   0xBD01             POP      {R0,PC}
+     78          
+
+   \                                 In section .text, align 2, keep-with-next
+     79          void turnToLeft(){
+   \                     turnToLeft: (+1)
+   \        0x0   0xB580             PUSH     {R7,LR}
+     80            toFrontLeftWheel();
+   \        0x2   0x.... 0x....      BL       toFrontLeftWheel
+     81            toBackRightWheel();
+   \        0x6   0x.... 0x....      BL       toBackRightWheel
+     82            //¾î´ÀÁ¤µµ µ¹¾Æ¾ßÇÏÁö??
+     83          }
+   \        0xA   0xBD01             POP      {R0,PC}
+     84          
+
+   \                                 In section .text, align 2, keep-with-next
+     85          void turnToRight90(){
+   \                     turnToRight90: (+1)
+   \        0x0   0xB580             PUSH     {R7,LR}
+     86            turnToRight();
+   \        0x2   0x.... 0x....      BL       turnToRight
+     87            delay_wheel(100);//will be changed
+   \        0x6   0x2064             MOVS     R0,#+100
+   \        0x8   0x.... 0x....      BL       delay_wheel
+     88            setDirectionToFront();
+   \        0xC   0x.... 0x....      BL       setDirectionToFront
+     89          }
+   \       0x10   0xBD01             POP      {R0,PC}
+     90          
+
+   \                                 In section .text, align 2, keep-with-next
+     91          void turnToLeft90(){
+   \                     turnToLeft90: (+1)
+   \        0x0   0xB580             PUSH     {R7,LR}
+     92            turnToLeft();
+   \        0x2   0x.... 0x....      BL       turnToLeft
+     93            delay_wheel(100);
+   \        0x6   0x2064             MOVS     R0,#+100
+   \        0x8   0x.... 0x....      BL       delay_wheel
+     94            setDirectionToFront();
+   \        0xC   0x.... 0x....      BL       setDirectionToFront
+     95          }
+   \       0x10   0xBD01             POP      {R0,PC}
+     96          
+     97          
+
+   \                                 In section .text, align 2, keep-with-next
+     98          void turnToLeftUntil(int isStop){
+   \                     turnToLeftUntil: (+1)
+   \        0x0   0xB510             PUSH     {R4,LR}
+   \        0x2   0x0004             MOVS     R4,R0
+     99              turnToLeft();
+   \        0x4   0x.... 0x....      BL       turnToLeft
+    100              if(isStop){
+   \        0x8   0x2C00             CMP      R4,#+0
+   \        0xA   0xD001             BEQ.N    ??turnToLeftUntil_0
+    101                  setDirectionToFront();
+   \        0xC   0x.... 0x....      BL       setDirectionToFront
+    102              }
+    103          }
+   \                     ??turnToLeftUntil_0: (+1)
+   \       0x10   0xBD10             POP      {R4,PC}
+    104          
+
+   \                                 In section .text, align 2, keep-with-next
+    105          void turnToRightUntil(int isStop){
+   \                     turnToRightUntil: (+1)
+   \        0x0   0xB510             PUSH     {R4,LR}
+   \        0x2   0x0004             MOVS     R4,R0
+    106              turnToRight();
+   \        0x4   0x.... 0x....      BL       turnToRight
+    107              if(isStop){
+   \        0x8   0x2C00             CMP      R4,#+0
+   \        0xA   0xD001             BEQ.N    ??turnToRightUntil_0
+    108                  setDirectionToFront();
+   \        0xC   0x.... 0x....      BL       setDirectionToFront
+    109              }
+    110          }
+   \                     ??turnToRightUntil_0: (+1)
+   \       0x10   0xBD10             POP      {R4,PC}
+    111          
+
+   \                                 In section .text, align 2, keep-with-next
+    112          void turn180(){
+   \                     turn180: (+1)
+   \        0x0   0xB580             PUSH     {R7,LR}
+    113            turnToRight();
+   \        0x2   0x.... 0x....      BL       turnToRight
+    114            delay_wheel(5000);
+   \        0x6   0xF241 0x3088      MOVW     R0,#+5000
+   \        0xA   0x.... 0x....      BL       delay_wheel
+    115             setDirectionToFront();
+   \        0xE   0x.... 0x....      BL       setDirectionToFront
+    116          }
+   \       0x12   0xBD01             POP      {R0,PC}
+    117          
+
+   \                                 In section .text, align 2, keep-with-next
+    118          void delay_wheel(int n){
+    119            int i = 0;
+   \                     delay_wheel: (+1)
+   \        0x0   0x2100             MOVS     R1,#+0
+    120            for(i = 0; i < n;i++);
+   \        0x2   0x2100             MOVS     R1,#+0
+   \        0x4   0xE000             B.N      ??delay_wheel_0
+   \                     ??delay_wheel_1: (+1)
+   \        0x6   0x1C49             ADDS     R1,R1,#+1
+   \                     ??delay_wheel_0: (+1)
+   \        0x8   0x4281             CMP      R1,R0
+   \        0xA   0xDBFC             BLT.N    ??delay_wheel_1
+    121          };
+   \        0xC   0x4770             BX       LR
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable6:
+   \        0x0   0x4001'1800        DC32     0x40011800
+    122              
+
+   Maximum stack usage in bytes:
+
+   .cstack Function
+   ------- --------
+      16   GPIO_Configure_wheel
+        16   -> GPIO_Init
+       8   RCC_Configure_wheel_pinE
+         8   -> RCC_APB2PeriphClockCmd
+       0   delay_wheel
+       8   setDirectionToBack
+         8   -> toBackLeftWheel
+         8   -> toBackRightWheel
+       8   setDirectionToFront
+         8   -> toFrontLeftWheel
+         8   -> toFrontRightWheel
+       8   stopAllWheel
+         8   -> GPIO_ResetBits
+       8   toBackLeftWheel
+         8   -> GPIO_ResetBits
+         8   -> GPIO_SetBits
+       8   toBackRightWheel
+         8   -> GPIO_ResetBits
+         8   -> GPIO_SetBits
+       8   toFrontLeftWheel
+         8   -> GPIO_ResetBits
+         8   -> GPIO_SetBits
+       8   toFrontRightWheel
+         8   -> GPIO_ResetBits
+         8   -> GPIO_SetBits
+       8   turn180
+         8   -> delay_wheel
+         8   -> setDirectionToFront
+         8   -> turnToRight
+       8   turnToLeft
+         8   -> toBackRightWheel
+         8   -> toFrontLeftWheel
+       8   turnToLeft90
+         8   -> delay_wheel
+         8   -> setDirectionToFront
+         8   -> turnToLeft
+       8   turnToLeftUntil
+         8   -> setDirectionToFront
+         8   -> turnToLeft
+       8   turnToRight
+         8   -> toBackLeftWheel
+         8   -> toFrontRightWheel
+       8   turnToRight90
+         8   -> delay_wheel
+         8   -> setDirectionToFront
+         8   -> turnToRight
+       8   turnToRightUntil
+         8   -> setDirectionToFront
+         8   -> turnToRight
+
+
+   Section sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+       4  ??DataTable6
+     110  GPIO_Configure_wheel
+      12  RCC_Configure_wheel_pinE
+      14  delay_wheel
+      12  setDirectionToBack
+      12  setDirectionToFront
+      38  stopAllWheel
+      22  toBackLeftWheel
+      22  toBackRightWheel
+      22  toFrontLeftWheel
+      22  toFrontRightWheel
+      20  turn180
+      12  turnToLeft
+      18  turnToLeft90
+      18  turnToLeftUntil
+      12  turnToRight
+      18  turnToRight90
+      18  turnToRightUntil
+
+ 
+ 406 bytes in section .text
+ 
+ 406 bytes of CODE memory
+
+Errors: none
+Warnings: none
